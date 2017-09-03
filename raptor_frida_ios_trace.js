@@ -19,7 +19,7 @@
 // generic trace
 function trace(pattern)
 {
-	var type = (pattern.indexOf(' ') === -1) ? 'module' : 'objc';
+	var type = (pattern.indexOf(" ") === -1) ? "module" : "objc";
 	var res = new ApiResolver(type);
 	var matches = res.enumerateMatchesSync(pattern);
 	var targets = uniqBy(matches, JSON.stringify);
