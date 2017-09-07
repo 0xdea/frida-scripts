@@ -16,27 +16,26 @@
  * # frida -U -f com.xxx.yyy -l raptor_frida_android.js --no-pause
  */
 
+// find loaded classes that match a pattern (sync)
+function findClass(pattern)
+{
+	console.warn("\n*** finding all classes that match pattern: " + pattern + "\n");
+
+	var allClasses = Java.enumerateLoadedClassesSync();
+	allClasses.forEach(function(aClass) {
+		if (aClass.match(pattern))
+			console.log(aClass);
+	});
+}
+
+// usage examples
 setTimeout(function() { // avoid java.lang.ClassNotFoundException
 
 	Java.perform(function() {
 
-		// Root detection bypass example
-
-		var hook = Java.use("com.target.utils.RootCheck");
-		console.log("info: hooking target class");
-
-		hook.isRooted.overload().implementation = function() {
-			console.log("info: entered target method");
-			
-			// obtain old retval
-			var retval = this.isRooted.overload().call(this);
-			console.log("old ret value: " + retval);
-
-			// set new retval
-			var retnew = false;
-			console.log("new ret value: " + retnew);
-			return retnew;
-		}
+		//findClass();		// print all loaded classes
+		//findClass("Root");	// print all classes that match a string
+		//findClass(/root/i);	// print all classes that match a regex (e.g., case insensitive)
 
 	});   
 
