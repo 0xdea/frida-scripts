@@ -13,7 +13,10 @@
  * Many thanks to @inode-, @federicodotta, and @mrmacete.
  *
  * Example usage:
- * # frida -U -f com.xxx.yyy -l raptor_frida_ios_trace.js --no-pause
+ * # frida -U -f com.target.app -l raptor_frida_ios_trace.js --no-pause
+ *
+ * Get the latest version at:
+ * https://github.com/0xdea/frida-scripts/
  */
 
 // generic trace
