@@ -10,10 +10,14 @@
  * "We want to help others achieve interop through reverse
  * engineering" -- @oleavr
  *
- * Many thanks to @inode-, @federicodotta, and @leonjza.
+ * Many thanks to @inode-, @federicodotta, @leonjza, and
+ * @dankluev.
  *
  * Example usage:
- * # frida -U -f com.xxx.yyy -l raptor_frida_android_trace.js --no-pause
+ * # frida -U -f com.target.app -l raptor_frida_android_trace.js --no-pause
+ *
+ * Get the latest version at:
+ * https://github.com/0xdea/frida-scripts/
  */
 
 // generic trace
@@ -94,6 +98,12 @@ function traceMethod(targetClassMethod)
 
 		hook[targetMethod].overloads[i].implementation = function() {
 			console.warn("\n*** entered " + targetClassMethod);
+
+			// print backtrace
+			// Java.perform(function() {
+			//	var bt = Java.use("android.util.Log").getStackTraceString(Java.use("java.lang.Exception").$new());
+			//	console.log("\nBacktrace:\n" + bt);
+			// });   
 
 			// print args
 			if (arguments.length) console.log();
