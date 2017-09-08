@@ -137,7 +137,7 @@ function printArg(desc, arg)
 	}
 }
 
-// some examples
+// usage examples
 if (ObjC.available) {
 
 	// trace("-[CredManager setPassword:]");
