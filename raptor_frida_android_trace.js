@@ -179,5 +179,4 @@ setTimeout(function() { // avoid java.lang.ClassNotFoundException
 		// trace("exports:*!open*");
 
 	});   
-
 }, 0);
