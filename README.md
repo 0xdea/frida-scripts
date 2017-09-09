@@ -3,7 +3,7 @@ A collection of my Frida.re instrumentation scripts to facilitate reverse engine
 
 ## iOS
 * **raptor_frida_ios_trace.js**. Full-featured ObjC and Module tracer for iOS.
-* **raptor_frida_ios_enum.js**. Functions to enumerate ObjC classes and methods.
+* **raptor_frida_ios_enum.js**. Collection of functions to enumerate ObjC classes and methods.
 * **ios-snippets/raptor_frida_ios_*.js**. Miscellaneous script snippets for iOS.
 
 ## Android
