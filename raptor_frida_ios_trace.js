@@ -10,7 +10,8 @@
  * "We want to help others achieve interop through reverse
  * engineering" -- @oleavr
  *
- * Many thanks to @inode-, @federicodotta, and @mrmacete.
+ * Many thanks to @inode-, @federicodotta, @mrmacete, and
+ * @dankluev.
  *
  * Example usage:
  * # frida -U -f com.target.app -l raptor_frida_ios_trace.js --no-pause
@@ -62,9 +63,12 @@ function traceObjC(impl, name)
 			if (this.flag) {
 				console.warn("\n*** entered " + name);
 
-				// print backtrace
+				// print full backtrace
 				// console.log("\nBacktrace:\n" + Thread.backtrace(this.context, Backtracer.ACCURATE)
 				//		.map(DebugSymbol.fromAddress).join("\n"));
+
+				// print caller
+				console.log("\nCaller: " + DebugSymbol.fromAddress(this.returnAddress));
 
 				// print args
 				if (name.indexOf(":") !== -1) {
