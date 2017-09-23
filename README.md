@@ -1,5 +1,5 @@
 # frida-scripts
-A collection of my Frida.re instrumentation scripts to facilitate reverse engineering of mobile Apps.
+A collection of my Frida.re instrumentation scripts to facilitate reverse engineering of mobile apps.
 
 ## iOS
 * **raptor_frida_ios_trace.js**. Full-featured ObjC and Module tracer for iOS.
