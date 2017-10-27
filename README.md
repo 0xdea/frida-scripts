@@ -3,7 +3,7 @@
 
 A collection of my Frida.re instrumentation scripts to facilitate reverse engineering of mobile apps.
 
-Blog Post: https://techblog.mediaservice.net/2017/09/tracing-arbitrary-methods-and-function-calls-on-android-and-ios/
+Blog post: https://techblog.mediaservice.net/2017/09/tracing-arbitrary-methods-and-function-calls-on-android-and-ios/
 
 ## iOS
 * **raptor_frida_ios_trace.js**. Full-featured ObjC and Module tracer for iOS.
