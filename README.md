@@ -1,9 +1,13 @@
 # frida-scripts
-[![](https://img.shields.io/badge/license-MIT%20License-red.svg)](https://opensource.org/licenses/MIT) [![](https://img.shields.io/badge/twitter-%400xdea-blue.svg)](https://twitter.com/0xdea)
+[![](https://img.shields.io/github/stars/0xdea/frida-scripts.svg?color=yellow)](https://github.com/0xdea/frida-scripts)
+[![](https://img.shields.io/github/forks/0xdea/frida-scripts.svg?color=green)](https://github.com/0xdea/frida-scripts)
+[![](https://img.shields.io/github/watchers/0xdea/frida-scripts.svg?color=red)](https://github.com/0xdea/frida-scripts)
+[![](https://img.shields.io/badge/license-MIT%20License-red.svg?color=lightgray)](https://opensource.org/licenses/MIT) 
+[![](https://img.shields.io/badge/twitter-%400xdea-blue.svg)](https://twitter.com/0xdea)
 
 A collection of my Frida.re instrumentation scripts to facilitate reverse engineering of mobile apps.
 
-Blog post: https://techblog.mediaservice.net/2017/09/tracing-arbitrary-methods-and-function-calls-on-android-and-ios/
+Blog post: https://web.archive.org/web/20200623001844/https://techblog.mediaservice.net/2017/09/tracing-arbitrary-methods-and-function-calls-on-android-and-ios/
 
 ## iOS
 * **raptor_frida_ios_trace.js**. Full-featured ObjC and Module tracer for iOS.
