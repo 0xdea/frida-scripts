@@ -27,7 +27,7 @@ function enumAllClasses()
 		try {
 			var className = aClass.match(/[L](.*);/)[1].replace(/\//g, ".");
 		}
-		catch(err) {} // avoid TypeError: cannot read property 1 of null
+		catch(err) {return;} // avoid TypeError: cannot read property 1 of null
 		allClasses.push(className);
 	});
 
