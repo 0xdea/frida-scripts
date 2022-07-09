@@ -5,6 +5,10 @@
 [![](https://img.shields.io/badge/license-MIT%20License-red.svg?color=lightgray)](https://opensource.org/licenses/MIT) 
 [![](https://img.shields.io/badge/twitter-%400xdea-blue.svg)](https://twitter.com/0xdea)
 
+> "Just because you're paranoid doesn't mean they aren't after you." 
+>
+> -- Joseph Heller, Catch-22
+
 A collection of my Frida.re instrumentation scripts to facilitate reverse engineering of mobile apps.
 
 Blog post:  
