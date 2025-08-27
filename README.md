@@ -9,7 +9,7 @@
 >
 > -- Joseph Heller, Catch-22
 
-A collection of my Frida.re instrumentation scripts to facilitate reverse engineering of mobile apps.
+A collection of my Frida.re instrumentation scripts to facilitate reverse engineering of mobile apps, and more.
 
 Blog post:  
 https://web.archive.org/web/20200623001844/https://techblog.mediaservice.net/2017/09/tracing-arbitrary-methods-and-function-calls-on-android-and-ios/
@@ -26,3 +26,6 @@ https://github.com/federicodotta/Brida
 * [**raptor_frida_android_trace.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_android_trace.js). Full-featured Java and Module tracer for Android.
 * [**raptor_frida_android_enum.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_android_enum.js). Collection of functions to enumerate Java classes and methods.
 * **android-snippets/raptor_frida_android_*.js**. Miscellaneous script snippets for Android.
+
+## Linux
+* [**raptor_frida_linux_enum.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_linux_enum.js). Collection of functions to enumerate modules and functions.
