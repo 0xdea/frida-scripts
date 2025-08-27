@@ -29,3 +29,9 @@ https://github.com/federicodotta/Brida
 
 ## Linux
 * [**raptor_frida_linux_enum.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_linux_enum.js). Collection of functions to enumerate modules and functions.
+
+## Windows
+* *TODO*
+
+## macOS
+* *TODO*
