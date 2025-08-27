@@ -28,7 +28,7 @@ https://github.com/federicodotta/Brida
 * **android-snippets/raptor_frida_android_*.js**. Miscellaneous script snippets for Android.
 
 ## Linux
-* [**raptor_frida_linux_enum.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_linux_enum.js). Collection of functions to enumerate modules and functions.
+* [**raptor_frida_linux_enum.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_linux_enum.js). Collection of functions to enumerate modules and functions in a binary.
 
 ## Windows
 * *TODO*
