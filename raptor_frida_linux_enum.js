@@ -55,13 +55,13 @@ function enumAllFunctions()
 // NOTE: `Module.enumerateSymbols()` and `Module.findSymbolByName()` don't work
 function findFunctions(glob)
 {
-	var matchingFunctions = []
+	var foundFunctions = []
 
 	for (const aFunction of DebugSymbol.findFunctionsMatching(glob)) {
-		matchingFunctions.push(DebugSymbol.fromAddress(ptr(aFunction)));
+		foundFunctions.push(DebugSymbol.fromAddress(ptr(aFunction)));
 	}
 
-	return matchingFunctions;
+	return foundFunctions;
 }
 
 // Enumerate all functions in a module using the `DebugSymbol` API
