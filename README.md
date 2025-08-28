@@ -28,6 +28,7 @@ https://github.com/federicodotta/Brida
 * [**android-snippets/**](https://github.com/0xdea/frida-scripts/tree/master/android-snippets). Miscellaneous script snippets for Android.
 
 ## Linux
+* [**raptor_frida_linux_trace.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_linux_trace.js). Full-featured function call tracer for Linux.
 * [**raptor_frida_linux_enum.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_linux_enum.js). Collection of functions to enumerate modules and functions in a binary.
 
 ## Windows
