@@ -11,6 +11,7 @@
  * further information on this world-class dynamic instrumentation toolkit.
  *
  * Example usage:
+ * $ pipx install frida-tools
  * $ frida -f hello-vuln -l raptor_frida_linux_enum.js --pause
  *
  * Get the latest version at:
