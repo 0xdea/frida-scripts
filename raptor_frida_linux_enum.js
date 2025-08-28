@@ -13,6 +13,9 @@
  * Example usage:
  * $ pipx install frida-tools
  * $ frida -f hello-vuln -l raptor_frida_linux_enum.js --pause
+ * 
+ * Tested with:
+ * Frida 17.2.1 on Ubuntu 24.0
  *
  * Get the latest version at:
  * https://github.com/0xdea/frida-scripts/
