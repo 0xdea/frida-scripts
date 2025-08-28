@@ -107,11 +107,11 @@ function uniqBy(array, key)
 //trace("imports:*!*");
 
 // Trace potential command injection sinks
-trace("imports:*!system");
-trace("imports:*!popen");
+//trace("imports:*!system");
+//trace("imports:*!popen");
 
 // Trace an export
 //trace("exports:*!snprintf");
 
 // Trace a function that matches a glob pattern
-trace("main")
+//trace("main")
