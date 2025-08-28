@@ -6,7 +6,7 @@
  * flow over the shortest possible route."
  *                                  -- Haruki Murakami, 1Q84
  *
- * Frida.re JS code to trace arbitrary functions calls in a Linux ELF binary
+ * Frida.re JS code to trace arbitrary function calls in a Linux ELF binary
  * for debugging and reverse engineering. See https://www.frida.re/ and
  * https://codeshare.frida.re/ for further information on this world-class
  * dynamic instrumentation toolkit.
