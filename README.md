@@ -25,7 +25,7 @@ https://github.com/federicodotta/Brida
 ## Android
 * [**raptor_frida_android_trace.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_android_trace.js). Full-featured Java and Module tracer for Android.
 * [**raptor_frida_android_enum.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_android_enum.js). Collection of functions to enumerate Java classes and methods.
-* [**android-snippets/**](https://github.com/0xdea/frida-scripts/tree/master/android-snippets)**. Miscellaneous script snippets for Android.
+* [**android-snippets/**](https://github.com/0xdea/frida-scripts/tree/master/android-snippets). Miscellaneous script snippets for Android.
 
 ## Linux
 * [**raptor_frida_linux_enum.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_linux_enum.js). Collection of functions to enumerate modules and functions in a binary.
