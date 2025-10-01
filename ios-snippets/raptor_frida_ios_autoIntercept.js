@@ -63,7 +63,7 @@ function autoIntercept(target)
 				console.log("\n*** entered", target, "***");
 
 				// print args
-				for (i = 0; i < argCount; i++) {
+				for (var i = 0; i < argCount; i++) {
 					printType("\narg " + (i + 1) + " type:\t", args[i + 2]);
 					printValue("arg " + (i + 1) + " value:\t", args[i + 2]);
 				}
