@@ -21,7 +21,7 @@
  * https://github.com/0xdea/frida-scripts/
  */
 
-// enumerate all ObjC classes
+// Enumerate all ObjC classes
 function enumAllClasses()
 {
 	var allClasses = [];
@@ -35,7 +35,7 @@ function enumAllClasses()
 	return allClasses;
 }
 
-// find all ObjC classes that match a pattern
+// Find all ObjC classes that match a pattern
 function findClasses(pattern)
 {
 	var allClasses = enumAllClasses();
@@ -50,7 +50,7 @@ function findClasses(pattern)
 	return foundClasses;
 }
 
-// enumerate all methods declared in an ObjC class
+// Enumerate all methods declared in an ObjC class
 function enumMethods(targetClass)
 {
 	var ownMethods = ObjC.classes[targetClass].$ownMethods;
@@ -58,7 +58,7 @@ function enumMethods(targetClass)
 	return ownMethods;
 }
 
-// enumerate all methods declared in all ObjC classes
+// Enumerate all methods declared in all ObjC classes
 function enumAllMethods()
 {
 	var allClasses = enumAllClasses();
@@ -74,7 +74,7 @@ function enumAllMethods()
 	return allMethods;
 }
 
-// find all ObjC methods that match a pattern
+// Find all ObjC methods that match a pattern
 function findMethods(pattern)
 {
 	var allMethods = enumAllMethods();
@@ -92,10 +92,10 @@ function findMethods(pattern)
 	return foundMethods;
 }
 
-// usage examples
+// Usage examples
 if (ObjC.available) {
 
-	// enumerate all classes
+	// Enumerate all classes
 	/*
 	var a = enumAllClasses();
 	a.forEach(function(s) { 
@@ -103,7 +103,7 @@ if (ObjC.available) {
 	});
 	*/
 
-	// find classes that match a pattern
+	// Find classes that match a pattern
 	/*
 	var a = findClasses(/password/i);
 	a.forEach(function(s) { 
@@ -111,7 +111,7 @@ if (ObjC.available) {
 	});
 	*/
 
-	// enumerate all methods in a class
+	// Enumerate all methods in a class
 	/*
 	var a = enumMethods("PasswordManager")
 	a.forEach(function(s) { 
@@ -119,7 +119,7 @@ if (ObjC.available) {
 	});
 	*/
 
-	// enumerate all methods
+	// Enumerate all available methods
 	/*
 	var d = enumAllMethods();
 	for (k in d) {
@@ -130,7 +130,7 @@ if (ObjC.available) {
 	}
 	*/
 
-	// find methods that match a pattern
+	// Find methods that match a pattern
 	/*
 	var d = findMethods(/password/i);
 	for (k in d) {
