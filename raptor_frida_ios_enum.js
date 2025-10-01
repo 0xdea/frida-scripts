@@ -1,18 +1,22 @@
 /*
- * raptor_frida_ios_enum.js - ObjC class/method enumerator
- * Copyright (c) 2017 Marco Ivaldi <raptor@0xdeadbeef.info>
+ * raptor_frida_ios_enum.js - ObjC class and method enumerator
+ * Copyright (c) 2017-2025 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
- * Frida.re JS functions to enumerate ObjC classes and
- * methods declared in an iOS app. See https://www.frida.re/ 
- * and https://codeshare.frida.re/ for further information on 
- * this powerful tool.
+ * "For all is like an ocean, all flows and connects; 
+ * touch it in one place and it echoes at the other end of the world."
+ *                        -- Fyodor Dostoevsky, The Brothers Karamazov
  *
- * "We want to help others achieve interop through reverse
- * engineering" -- @oleavr
+ * Frida.re JS code to enumerate ObjC classes and methods declared in an
+ * iOS app. See https://www.frida.re/ and https://codeshare.frida.re/ for 
+ * further information on this world-class dynamic instrumentation toolkit.
  *
  * Example usage:
- * # frida -U -f com.target.app -l raptor_frida_ios_enum.js --no-pause
+ * $ pipx install frida-tools
+ * $ frida -U -f com.target.app -l raptor_frida_ios_enum.js
  *
+ * Tested with:
+ * Frida 17.3.2 on macOS 15.6.1 with iPhone 8 (iOS 16.5 + https://palera.in/)
+ * 
  * Get the latest version at:
  * https://github.com/0xdea/frida-scripts/
  */
