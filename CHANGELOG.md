@@ -4,6 +4,8 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+* New release ported to Frida >= 17.
+
 ### Added
 
 * Add Linux enumeration script.
