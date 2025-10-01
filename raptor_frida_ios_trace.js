@@ -27,6 +27,7 @@
  */
 
 // Generic trace
+// TODO: support the "swift" type
 function trace(pattern)
 {
 	var type = (pattern.indexOf(" ") === -1) ? "module" : "objc";

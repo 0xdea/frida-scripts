@@ -120,6 +120,7 @@ if (ObjC.available) {
 	*/
 
 	// Enumerate all available methods
+	// TODO: understand why this doesn't work in script, but works in REPL
 	/*
 	var d = enumAllMethods();
 	for (k in d) {
@@ -131,6 +132,7 @@ if (ObjC.available) {
 	*/
 
 	// Find methods that match a pattern
+	// TODO: understand why this doesn't work in script, but works in REPL
 	/*
 	var d = findMethods(/password/i);
 	for (k in d) {
