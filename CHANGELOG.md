@@ -17,8 +17,8 @@ All notable changes to this project are documented in this file.
 
 * Historical battle-tested stable release that used to work before the [breaking changes](https://frida.re/news/2025/05/17/frida-17-0-0-released/) in Frida 17.x.
 
-[unreleased]: https://github.com/0xdea/rhabdomancer/compare/v0.1...HEAD
+[unreleased]: https://github.com/0xdea/frida-scripts/compare/v0.1...HEAD
 
-[0.2]: https://github.com/0xdea/rhabdomancer/compare/v0.1...v0.2
+[0.2]: https://github.com/0xdea/frida-scripts/compare/v0.1...v0.2
 
 [0.1]: https://github.com/0xdea/frida-scripts/releases/tag/v0.1
