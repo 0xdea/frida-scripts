@@ -4,7 +4,7 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
-* New release ported to Frida >= 17.
+* New release of main scripts ported to Frida >= 17.
 
 ### Added
 
@@ -19,6 +19,7 @@ All notable changes to this project are documented in this file.
 ### Fixed
 
 * Port iOS trace script to Frida 17.x.
+* Port Android trace script to Frida 17.x.
 
 ## [0.1] - 2024-01-04
 

@@ -108,7 +108,7 @@ function traceModule(impl, name)
 
 		onEnter: function(args) {
 
-			// Trace only the intended calls
+			// Trace only intended calls
 			this.flag = 0;
 			// var filename = args[0].readCString();
 			// if (filename.indexOf("Bundle") === -1 && filename.indexOf("Cache") === -1) // exclusion list
@@ -118,7 +118,7 @@ function traceModule(impl, name)
 			if (this.flag) {
 				console.warn("\n*** entered " + name);
 
-				// print backtrace
+				// Print backtrace
 				console.log("\nBacktrace:\n" + Thread.backtrace(this.context, Backtracer.ACCURATE)
 						.map(DebugSymbol.fromAddress).join("\n"));
 			}

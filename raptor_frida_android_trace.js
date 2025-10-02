@@ -1,5 +1,5 @@
 /*
- * raptor_frida_android_trace.js - Java and Module tracer for Android
+ * raptor_frida_android_trace.js - Java/Module tracer for Android
  * Copyright (c) 2017-2025 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
  * "Life is not like water. Things in life don't necessarily 
@@ -34,7 +34,7 @@ function trace(pattern)
 
 		// trace Module
 		var res = new ApiResolver("module");
-		var matches = res.enumerateMatchesSync(pattern);
+		var matches = res.enumerateMatches(pattern);
 		var targets = uniqBy(matches, JSON.stringify);
 		targets.forEach(function(target) {
 			traceModule(target.address, target.name);
@@ -42,20 +42,23 @@ function trace(pattern)
 
 	} else if (type === "java") {
 
-		// Trace Java Class
+		// Trace Java class
 		var found = false;
 		Java.enumerateLoadedClasses({
 			onMatch: function(aClass) {
 				if (aClass.match(pattern)) {
 					found = true;
-					var className = aClass.match(/[L](.*);/)[1].replace(/\//g, ".");
+					try {
+						var className = aClass.match(/[L](.*);/)[1].replace(/\//g, ".");
+					}
+					catch(err) {return;} // Avoid TypeError: cannot read property 1 of null
 					traceClass(className);
 				}
 			},
 			onComplete: function() {}
 		});
 
-		// Trace Java Method
+		// Trace Java method
 		if (!found) {
 			try {
 				traceMethod(pattern);
@@ -67,7 +70,7 @@ function trace(pattern)
 	}
 }
 
-// Find and trace all methods declared in a Java Class
+// Find and trace all methods declared in a Java class
 function traceClass(targetClass)
 {
 	var hook = Java.use(targetClass);
@@ -104,20 +107,20 @@ function traceMethod(targetClassMethod)
 		hook[targetMethod].overloads[i].implementation = function() {
 			console.warn("\n*** entered " + targetClassMethod);
 
-			// print backtrace
+			// Print backtrace
 			// Java.perform(function() {
 			//	var bt = Java.use("android.util.Log").getStackTraceString(Java.use("java.lang.Exception").$new());
 			//	console.log("\nBacktrace:\n" + bt);
 			// });   
 
-			// print args
+			// Print args
 			if (arguments.length) console.log();
 			for (var j = 0; j < arguments.length; j++) {
 				console.log("arg[" + j + "]: " + arguments[j]);
 			}
 
-			// print retval
-			var retval = this[targetMethod].apply(this, arguments); // rare crash (Frida bug?)
+			// Print retval
+			var retval = this[targetMethod].apply(this, arguments); // Rare crash (Frida bug?)
 			console.log("\nretval: " + retval);
 			console.warn("\n*** exiting " + targetClassMethod);
 			return retval;
@@ -134,9 +137,9 @@ function traceModule(impl, name)
 
 		onEnter: function(args) {
 
-			// Trace only the intended calls
+			// Trace only intended calls
 			this.flag = false;
-			// var filename = Memory.readCString(ptr(args[0]));
+			// var filename = args[0].readCString();
 			// if (filename.indexOf("XYZ") === -1 && filename.indexOf("ZYX") === -1) // exclusion list
 			// if (filename.indexOf("my.interesting.file") !== -1) // inclusion list
 				this.flag = true;
@@ -145,8 +148,8 @@ function traceModule(impl, name)
 				console.warn("\n*** entered " + name);
 
 				// Print backtrace
-				console.log("\nBacktrace:\n" + Thread.backtrace(this.context, Backtracer.ACCURATE)
-						.map(DebugSymbol.fromAddress).join("\n"));
+				// console.log("\nBacktrace:\n" + Thread.backtrace(this.context, Backtracer.ACCURATE)
+				// 		.map(DebugSymbol.fromAddress).join("\n"));
 			}
 		},
 
@@ -173,11 +176,12 @@ function uniqBy(array, key)
 }
 
 // Usage examples
-setTimeout(function() { // avoid java.lang.ClassNotFoundException
+setTimeout(function() { // Avoid java.lang.ClassNotFoundException
 
 	Java.perform(function() {
 
 		// trace("com.target.utils.CryptoUtils.decrypt");
+		// trace("android.os.storage.StorageVolume");
 		// trace("com.target.utils.CryptoUtils");
 		// trace("CryptoUtils");
 		// trace(/crypto/i);
