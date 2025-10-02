@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented in this file.
 
-## [Unreleased]
+## [0.2] - 2025-10-02
 
 * New release of main scripts ported to Frida >= 17.
 
