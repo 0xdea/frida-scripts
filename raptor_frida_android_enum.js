@@ -1,23 +1,27 @@
 /*
- * raptor_frida_android_enum.js - Java class/method enumerator
- * Copyright (c) 2017 Marco Ivaldi <raptor@0xdeadbeef.info>
+ * raptor_frida_android_enum.js - Java class and method enumerator
+ * Copyright (c) 2017-2025 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
- * Frida.re JS functions to enumerate Java classes and methods 
- * declared in an iOS app. See https://www.frida.re/ and 
- * https://codeshare.frida.re/ for further information on this 
- * powerful tool.
- *
- * "We want to help others achieve interop through reverse
- * engineering" -- @oleavr
+ * "For all is like an ocean, all flows and connects; 
+ * touch it in one place and it echoes at the other end of the world."
+ *                        -- Fyodor Dostoevsky, The Brothers Karamazov
+ * 
+ * Frida.re JS code to enumerate Java classes and methods declared in an 
+ * Android app. See https://www.frida.re/ and https://codeshare.frida.re/ for 
+ * further information on this world-class dynamic instrumentation toolkit.
  *
  * Example usage:
- * # frida -U -f com.target.app -l raptor_frida_android_enum.js --no-pause
+ * $ pipx install frida-tools
+ * $ frida -U -f com.target.app -l raptor_frida_android_enum.js
+ *
+ * Tested with:
+ * Frida 17.3.2 on macOS 15.6.1 with Redmi Note 10S (Android 11)
  *
  * Get the latest version at:
  * https://github.com/0xdea/frida-scripts/
  */
 
-// enumerate all Java classes
+// Enumerate all Java classes
 function enumAllClasses()
 {
 	var allClasses = [];
@@ -27,14 +31,14 @@ function enumAllClasses()
 		try {
 			var className = aClass.match(/[L](.*);/)[1].replace(/\//g, ".");
 		}
-		catch(err) {return;} // avoid TypeError: cannot read property 1 of null
+		catch(err) {return;} // Avoid TypeError: cannot read property 1 of null
 		allClasses.push(className);
 	});
 
 	return allClasses;
 }
 
-// find all Java classes that match a pattern
+// Find all Java classes that match a pattern
 function findClasses(pattern)
 {
 	var allClasses = enumAllClasses();
@@ -46,13 +50,13 @@ function findClasses(pattern)
 				foundClasses.push(aClass);
 			}
 		}
-		catch(err) {} // avoid TypeError: cannot read property 'match' of undefined
+		catch(err) {} // Avoid TypeError: cannot read property 'match' of undefined
 	});
 
 	return foundClasses;
 }
 
-// enumerate all methods declared in a Java class
+// Enumerate all methods declared in a Java class
 function enumMethods(targetClass)
 {
 	var hook = Java.use(targetClass);
@@ -71,8 +75,8 @@ function enumMethods(targetClass)
  * See raptor_frida_ios_enum.js for a couple of ObjC implementation examples.
  */
 
-// usage examples
-setTimeout(function() { // avoid java.lang.ClassNotFoundException
+// Usage examples
+setTimeout(function() { // Avoid java.lang.ClassNotFoundException
 
 	Java.perform(function() {
 

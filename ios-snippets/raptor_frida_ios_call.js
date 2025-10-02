@@ -38,7 +38,7 @@ if (ObjC.available) {
 			console.log("args[3] value:", obj.toString());
 
 			// 2nd arg's contents (array)
-			for (i = 0; i < obj.count(); i++)
+			for (var i = 0; i < obj.count(); i++)
 				console.log(ObjC.Object(obj.objectAtIndex_(i)).$class);
 		},
 

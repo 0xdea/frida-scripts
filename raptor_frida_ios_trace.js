@@ -1,31 +1,37 @@
 /*
- * raptor_frida_ios_trace.js - ObjC & Module tracer for iOS
- * Copyright (c) 2017 Marco Ivaldi <raptor@0xdeadbeef.info>
+ * raptor_frida_ios_trace.js - ObjC and Module tracer for iOS
+ * Copyright (c) 2017-2025 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
- * Frida.re JS script to trace arbitrary ObjC methods and
- * Module functions for debugging and reverse engineering.
- * See https://www.frida.re/ and https://codeshare.frida.re/
- * for further information on this powerful tool.
- *
- * "We want to help others achieve interop through reverse
- * engineering" -- @oleavr
- *
- * Many thanks to @inode-, @federicodotta, @mrmacete, and
- * @dankluev.
+ * "Life is not like water. Things in life don't necessarily 
+ * flow over the shortest possible route."
+ *                                  -- Haruki Murakami, 1Q84
+ * 
+ * Frida.re JS code to trace arbitrary ObjC methods and Module functions calls 
+ * in an iOS app for debugging and reverse engineering. See https://www.frida.re/ 
+ * and https://codeshare.frida.re/ for further information on this world-class
+ * dynamic instrumentation toolkit.
  *
  * Example usage:
- * # frida -U -f com.target.app -l raptor_frida_ios_trace.js --no-pause
+ * $ pipx install frida-tools
+ * $ frida -U -f com.target.app -l raptor_frida_ios_trace.js
  *
+ * Tested with:
+ * Frida 17.3.2 on macOS 15.6.1 with iPhone 8 (iOS 16.5 + https://palera.in/)
+ * 
+ * Thanks:
+ * @inode-, @federicodotta, @mrmacete, @dankluev
+ * 
  * Get the latest version at:
  * https://github.com/0xdea/frida-scripts/
  */
 
-// generic trace
+// Generic trace
+// TODO: support the "swift" type
 function trace(pattern)
 {
 	var type = (pattern.indexOf(" ") === -1) ? "module" : "objc";
 	var res = new ApiResolver(type);
-	var matches = res.enumerateMatchesSync(pattern);
+	var matches = res.enumerateMatches(pattern);
 	var targets = uniqBy(matches, JSON.stringify);
 
 	targets.forEach(function(target) {
@@ -36,7 +42,7 @@ function trace(pattern)
 	});
 }
 
-// remove duplicates from array
+// Remove duplicates from array
 function uniqBy(array, key) 
 {
 	var seen = {};
@@ -46,7 +52,7 @@ function uniqBy(array, key)
 	});
 }
 
-// trace ObjC methods
+// Trace ObjC methods
 function traceObjC(impl, name)
 {
 	console.log("Tracing " + name);
@@ -55,7 +61,7 @@ function traceObjC(impl, name)
 
 		onEnter: function(args) {
 
-			// debug only the intended calls
+			// Trace only the intended calls
 			this.flag = 0;
 			// if (ObjC.Object(args[2]).toString() === "1234567890abcdef1234567890abcdef12345678")
 				this.flag = 1;
@@ -63,14 +69,14 @@ function traceObjC(impl, name)
 			if (this.flag) {
 				console.warn("\n*** entered " + name);
 
-				// print full backtrace
+				// Print full backtrace
 				// console.log("\nBacktrace:\n" + Thread.backtrace(this.context, Backtracer.ACCURATE)
 				//		.map(DebugSymbol.fromAddress).join("\n"));
 
-				// print caller
+				// Print caller
 				console.log("\nCaller: " + DebugSymbol.fromAddress(this.returnAddress));
 
-				// print args
+				// Print args
 				if (name.indexOf(":") !== -1) {
 					console.log();
 					var par = name.split(":");
@@ -84,7 +90,7 @@ function traceObjC(impl, name)
 		onLeave: function(retval) {
 
 			if (this.flag) {
-				// print retval
+				// Print retval
 				printArg("\nretval: ", retval);
 				console.warn("\n*** exiting " + name);
 			}
@@ -93,7 +99,7 @@ function traceObjC(impl, name)
 	});
 }
 
-// trace Module functions
+// Trace Module functions
 function traceModule(impl, name)
 {
 	console.log("Tracing " + name);
@@ -102,9 +108,9 @@ function traceModule(impl, name)
 
 		onEnter: function(args) {
 
-			// debug only the intended calls
+			// Trace only intended calls
 			this.flag = 0;
-			// var filename = Memory.readCString(ptr(args[0]));
+			// var filename = args[0].readCString();
 			// if (filename.indexOf("Bundle") === -1 && filename.indexOf("Cache") === -1) // exclusion list
 			// if (filename.indexOf("my.interesting.file") !== -1) // inclusion list
 				this.flag = 1;
@@ -112,7 +118,7 @@ function traceModule(impl, name)
 			if (this.flag) {
 				console.warn("\n*** entered " + name);
 
-				// print backtrace
+				// Print backtrace
 				console.log("\nBacktrace:\n" + Thread.backtrace(this.context, Backtracer.ACCURATE)
 						.map(DebugSymbol.fromAddress).join("\n"));
 			}
@@ -121,7 +127,7 @@ function traceModule(impl, name)
 		onLeave: function(retval) {
 
 			if (this.flag) {
-				// print retval
+				// Print retval
 				printArg("\nretval: ", retval);
 				console.warn("\n*** exiting " + name);
 			}
@@ -130,18 +136,22 @@ function traceModule(impl, name)
 	});
 }
 
-// print helper
+// Print helper
+// TODO: implement a safe way to print ObjC objects and especially NSStrings/CStrings
 function printArg(desc, arg)
 {
+	/*
 	try {
 		console.log(desc + ObjC.Object(arg));
 	}
 	catch(err) {
 		console.log(desc + arg);
 	}
+	*/
+	console.log(desc + arg);
 }
 
-// usage examples
+// Usage examples
 if (ObjC.available) {
 
 	// trace("-[CredManager setPassword:]");

@@ -1,23 +1,27 @@
 /*
- * raptor_frida_ios_enum.js - ObjC class/method enumerator
- * Copyright (c) 2017 Marco Ivaldi <raptor@0xdeadbeef.info>
+ * raptor_frida_ios_enum.js - ObjC class and method enumerator
+ * Copyright (c) 2017-2025 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
- * Frida.re JS functions to enumerate ObjC classes and
- * methods declared in an iOS app. See https://www.frida.re/ 
- * and https://codeshare.frida.re/ for further information on 
- * this powerful tool.
+ * "For all is like an ocean, all flows and connects; 
+ * touch it in one place and it echoes at the other end of the world."
+ *                        -- Fyodor Dostoevsky, The Brothers Karamazov
  *
- * "We want to help others achieve interop through reverse
- * engineering" -- @oleavr
+ * Frida.re JS code to enumerate ObjC classes and methods declared in an
+ * iOS app. See https://www.frida.re/ and https://codeshare.frida.re/ for 
+ * further information on this world-class dynamic instrumentation toolkit.
  *
  * Example usage:
- * # frida -U -f com.target.app -l raptor_frida_ios_enum.js --no-pause
+ * $ pipx install frida-tools
+ * $ frida -U -f com.target.app -l raptor_frida_ios_enum.js
  *
+ * Tested with:
+ * Frida 17.3.2 on macOS 15.6.1 with iPhone 8 (iOS 16.5 + https://palera.in/)
+ * 
  * Get the latest version at:
  * https://github.com/0xdea/frida-scripts/
  */
 
-// enumerate all ObjC classes
+// Enumerate all ObjC classes
 function enumAllClasses()
 {
 	var allClasses = [];
@@ -31,7 +35,7 @@ function enumAllClasses()
 	return allClasses;
 }
 
-// find all ObjC classes that match a pattern
+// Find all ObjC classes that match a pattern
 function findClasses(pattern)
 {
 	var allClasses = enumAllClasses();
@@ -46,7 +50,7 @@ function findClasses(pattern)
 	return foundClasses;
 }
 
-// enumerate all methods declared in an ObjC class
+// Enumerate all methods declared in an ObjC class
 function enumMethods(targetClass)
 {
 	var ownMethods = ObjC.classes[targetClass].$ownMethods;
@@ -54,7 +58,7 @@ function enumMethods(targetClass)
 	return ownMethods;
 }
 
-// enumerate all methods declared in all ObjC classes
+// Enumerate all methods declared in all ObjC classes
 function enumAllMethods()
 {
 	var allClasses = enumAllClasses();
@@ -70,7 +74,7 @@ function enumAllMethods()
 	return allMethods;
 }
 
-// find all ObjC methods that match a pattern
+// Find all ObjC methods that match a pattern
 function findMethods(pattern)
 {
 	var allMethods = enumAllMethods();
@@ -88,10 +92,10 @@ function findMethods(pattern)
 	return foundMethods;
 }
 
-// usage examples
+// Usage examples
 if (ObjC.available) {
 
-	// enumerate all classes
+	// Enumerate all classes
 	/*
 	var a = enumAllClasses();
 	a.forEach(function(s) { 
@@ -99,7 +103,7 @@ if (ObjC.available) {
 	});
 	*/
 
-	// find classes that match a pattern
+	// Find classes that match a pattern
 	/*
 	var a = findClasses(/password/i);
 	a.forEach(function(s) { 
@@ -107,7 +111,7 @@ if (ObjC.available) {
 	});
 	*/
 
-	// enumerate all methods in a class
+	// Enumerate all methods in a class
 	/*
 	var a = enumMethods("PasswordManager")
 	a.forEach(function(s) { 
@@ -115,7 +119,8 @@ if (ObjC.available) {
 	});
 	*/
 
-	// enumerate all methods
+	// Enumerate all available methods
+	// TODO: understand why this doesn't work in script, but works in REPL
 	/*
 	var d = enumAllMethods();
 	for (k in d) {
@@ -126,7 +131,8 @@ if (ObjC.available) {
 	}
 	*/
 
-	// find methods that match a pattern
+	// Find methods that match a pattern
+	// TODO: understand why this doesn't work in script, but works in REPL
 	/*
 	var d = findMethods(/password/i);
 	for (k in d) {

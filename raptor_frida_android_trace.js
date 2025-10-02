@@ -1,26 +1,31 @@
 /*
- * raptor_frida_android_trace.js - Code tracer for Android
- * Copyright (c) 2017 Marco Ivaldi <raptor@0xdeadbeef.info>
+ * raptor_frida_android_trace.js - Java/Module tracer for Android
+ * Copyright (c) 2017-2025 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
- * Frida.re JS script to trace arbitrary Java Methods and
- * Module functions for debugging and reverse engineering.
- * See https://www.frida.re/ and https://codeshare.frida.re/
- * for further information on this powerful tool.
- *
- * "We want to help others achieve interop through reverse
- * engineering" -- @oleavr
- *
- * Many thanks to @inode-, @federicodotta, @leonjza, and
- * @dankluev.
+ * "Life is not like water. Things in life don't necessarily 
+ * flow over the shortest possible route."
+ *                                  -- Haruki Murakami, 1Q84
+ * 
+ * Frida.re JS code to trace arbitrary Java methods and Module functions calls
+ * in an Android app for debugging and reverse engineering. See https://www.frida.re/ 
+ * and https://codeshare.frida.re/ for further information on this world-class
+ * dynamic instrumentation toolkit.
  *
  * Example usage:
- * # frida -U -f com.target.app -l raptor_frida_android_trace.js --no-pause
+ * $ pipx install frida-tools
+ * $ frida -U -f com.target.app -l raptor_frida_android_trace.js
+ *
+ * Tested with:
+ * Frida 17.3.2 on macOS 15.6.1 with Redmi Note 10S (Android 11)
+ * 
+ * Thanks:
+ * @inode-, @federicodotta, @leonjza, @dankluev
  *
  * Get the latest version at:
  * https://github.com/0xdea/frida-scripts/
  */
 
-// generic trace
+// Generic trace
 function trace(pattern)
 {
 	var type = (pattern.toString().indexOf("!") === -1) ? "java" : "module";
@@ -29,7 +34,7 @@ function trace(pattern)
 
 		// trace Module
 		var res = new ApiResolver("module");
-		var matches = res.enumerateMatchesSync(pattern);
+		var matches = res.enumerateMatches(pattern);
 		var targets = uniqBy(matches, JSON.stringify);
 		targets.forEach(function(target) {
 			traceModule(target.address, target.name);
@@ -37,32 +42,35 @@ function trace(pattern)
 
 	} else if (type === "java") {
 
-		// trace Java Class
+		// Trace Java class
 		var found = false;
 		Java.enumerateLoadedClasses({
 			onMatch: function(aClass) {
 				if (aClass.match(pattern)) {
 					found = true;
-					var className = aClass.match(/[L](.*);/)[1].replace(/\//g, ".");
+					try {
+						var className = aClass.match(/[L](.*);/)[1].replace(/\//g, ".");
+					}
+					catch(err) {return;} // Avoid TypeError: cannot read property 1 of null
 					traceClass(className);
 				}
 			},
 			onComplete: function() {}
 		});
 
-		// trace Java Method
+		// Trace Java method
 		if (!found) {
 			try {
 				traceMethod(pattern);
 			}
-			catch(err) { // catch non existing classes/methods
+			catch(err) { // Catch non-existing classes/methods
 				console.error(err);
 			}
 		}
 	}
 }
 
-// find and trace all methods declared in a Java Class
+// Find and trace all methods declared in a Java class
 function traceClass(targetClass)
 {
 	var hook = Java.use(targetClass);
@@ -80,7 +88,7 @@ function traceClass(targetClass)
 	});
 }
 
-// trace a specific Java Method
+// Trace a specific Java method
 function traceMethod(targetClassMethod)
 {
 	var delim = targetClassMethod.lastIndexOf(".");
@@ -99,20 +107,21 @@ function traceMethod(targetClassMethod)
 		hook[targetMethod].overloads[i].implementation = function() {
 			console.warn("\n*** entered " + targetClassMethod);
 
-			// print backtrace
+			// Print backtrace
 			// Java.perform(function() {
 			//	var bt = Java.use("android.util.Log").getStackTraceString(Java.use("java.lang.Exception").$new());
 			//	console.log("\nBacktrace:\n" + bt);
 			// });   
 
-			// print args
+			// Print args
+			// TODO: double check this works without the occasional crash
 			if (arguments.length) console.log();
 			for (var j = 0; j < arguments.length; j++) {
 				console.log("arg[" + j + "]: " + arguments[j]);
 			}
 
-			// print retval
-			var retval = this[targetMethod].apply(this, arguments); // rare crash (Frida bug?)
+			// Print retval
+			var retval = this[targetMethod].apply(this, arguments); // Rare crash (Frida bug?)
 			console.log("\nretval: " + retval);
 			console.warn("\n*** exiting " + targetClassMethod);
 			return retval;
@@ -120,7 +129,7 @@ function traceMethod(targetClassMethod)
 	}
 }
 
-// trace Module functions
+// Trace Module functions
 function traceModule(impl, name)
 {
 	console.log("Tracing " + name);
@@ -129,9 +138,9 @@ function traceModule(impl, name)
 
 		onEnter: function(args) {
 
-			// debug only the intended calls
+			// Trace only intended calls
 			this.flag = false;
-			// var filename = Memory.readCString(ptr(args[0]));
+			// var filename = args[0].readCString();
 			// if (filename.indexOf("XYZ") === -1 && filename.indexOf("ZYX") === -1) // exclusion list
 			// if (filename.indexOf("my.interesting.file") !== -1) // inclusion list
 				this.flag = true;
@@ -139,16 +148,17 @@ function traceModule(impl, name)
 			if (this.flag) {
 				console.warn("\n*** entered " + name);
 
-				// print backtrace
-				console.log("\nBacktrace:\n" + Thread.backtrace(this.context, Backtracer.ACCURATE)
-						.map(DebugSymbol.fromAddress).join("\n"));
+				// Print backtrace
+				// TODO: understand why this crashes sometimes
+				// console.log("\nBacktrace:\n" + Thread.backtrace(this.context, Backtracer.ACCURATE)
+				// 		.map(DebugSymbol.fromAddress).join("\n"));
 			}
 		},
 
 		onLeave: function(retval) {
 
 			if (this.flag) {
-				// print retval
+				// Print retval
 				console.log("\nretval: " + retval);
 				console.warn("\n*** exiting " + name);
 			}
@@ -157,7 +167,7 @@ function traceModule(impl, name)
 	});
 }
 
-// remove duplicates from array
+// Remove duplicates from array
 function uniqBy(array, key)
 {
         var seen = {};
@@ -167,12 +177,13 @@ function uniqBy(array, key)
         });
 }
 
-// usage examples
-setTimeout(function() { // avoid java.lang.ClassNotFoundException
+// Usage examples
+setTimeout(function() { // Avoid java.lang.ClassNotFoundException
 
 	Java.perform(function() {
 
 		// trace("com.target.utils.CryptoUtils.decrypt");
+		// trace("android.os.storage.StorageVolume");
 		// trace("com.target.utils.CryptoUtils");
 		// trace("CryptoUtils");
 		// trace(/crypto/i);
