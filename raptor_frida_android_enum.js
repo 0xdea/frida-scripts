@@ -31,7 +31,7 @@ function enumAllClasses()
 		try {
 			var className = aClass.match(/[L](.*);/)[1].replace(/\//g, ".");
 		}
-		catch(err) {return;} // avoid TypeError: cannot read property 1 of null
+		catch(err) {return;} // Avoid TypeError: cannot read property 1 of null
 		allClasses.push(className);
 	});
 
@@ -50,7 +50,7 @@ function findClasses(pattern)
 				foundClasses.push(aClass);
 			}
 		}
-		catch(err) {} // avoid TypeError: cannot read property 'match' of undefined
+		catch(err) {} // Avoid TypeError: cannot read property 'match' of undefined
 	});
 
 	return foundClasses;
@@ -76,7 +76,7 @@ function enumMethods(targetClass)
  */
 
 // Usage examples
-setTimeout(function() { // avoid java.lang.ClassNotFoundException
+setTimeout(function() { // Avoid java.lang.ClassNotFoundException
 
 	Java.perform(function() {
 

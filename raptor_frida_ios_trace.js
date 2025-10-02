@@ -11,7 +11,6 @@
  * and https://codeshare.frida.re/ for further information on this world-class
  * dynamic instrumentation toolkit.
  *
- *
  * Example usage:
  * $ pipx install frida-tools
  * $ frida -U -f com.target.app -l raptor_frida_ios_trace.js
@@ -70,7 +69,7 @@ function traceObjC(impl, name)
 			if (this.flag) {
 				console.warn("\n*** entered " + name);
 
-				// print full backtrace
+				// Print full backtrace
 				// console.log("\nBacktrace:\n" + Thread.backtrace(this.context, Backtracer.ACCURATE)
 				//		.map(DebugSymbol.fromAddress).join("\n"));
 

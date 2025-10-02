@@ -1,26 +1,31 @@
 /*
- * raptor_frida_android_trace.js - Code tracer for Android
- * Copyright (c) 2017 Marco Ivaldi <raptor@0xdeadbeef.info>
+ * raptor_frida_android_trace.js - Java and Module tracer for Android
+ * Copyright (c) 2017-2025 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
- * Frida.re JS script to trace arbitrary Java Methods and
- * Module functions for debugging and reverse engineering.
- * See https://www.frida.re/ and https://codeshare.frida.re/
- * for further information on this powerful tool.
- *
- * "We want to help others achieve interop through reverse
- * engineering" -- @oleavr
- *
- * Many thanks to @inode-, @federicodotta, @leonjza, and
- * @dankluev.
+ * "Life is not like water. Things in life don't necessarily 
+ * flow over the shortest possible route."
+ *                                  -- Haruki Murakami, 1Q84
+ * 
+ * Frida.re JS code to trace arbitrary Java methods and Module functions calls
+ * in an Android app for debugging and reverse engineering. See https://www.frida.re/ 
+ * and https://codeshare.frida.re/ for further information on this world-class
+ * dynamic instrumentation toolkit.
  *
  * Example usage:
- * # frida -U -f com.target.app -l raptor_frida_android_trace.js --no-pause
+ * $ pipx install frida-tools
+ * $ frida -U -f com.target.app -l raptor_frida_android_trace.js
+ *
+ * Tested with:
+ * Frida 17.3.2 on macOS 15.6.1 with Redmi Note 10S (Android 11)
+ * 
+ * Thanks:
+ * @inode-, @federicodotta, @leonjza, @dankluev
  *
  * Get the latest version at:
  * https://github.com/0xdea/frida-scripts/
  */
 
-// generic trace
+// Generic trace
 function trace(pattern)
 {
 	var type = (pattern.toString().indexOf("!") === -1) ? "java" : "module";
@@ -37,7 +42,7 @@ function trace(pattern)
 
 	} else if (type === "java") {
 
-		// trace Java Class
+		// Trace Java Class
 		var found = false;
 		Java.enumerateLoadedClasses({
 			onMatch: function(aClass) {
@@ -50,19 +55,19 @@ function trace(pattern)
 			onComplete: function() {}
 		});
 
-		// trace Java Method
+		// Trace Java Method
 		if (!found) {
 			try {
 				traceMethod(pattern);
 			}
-			catch(err) { // catch non existing classes/methods
+			catch(err) { // Catch non-existing classes/methods
 				console.error(err);
 			}
 		}
 	}
 }
 
-// find and trace all methods declared in a Java Class
+// Find and trace all methods declared in a Java Class
 function traceClass(targetClass)
 {
 	var hook = Java.use(targetClass);
@@ -80,7 +85,7 @@ function traceClass(targetClass)
 	});
 }
 
-// trace a specific Java Method
+// Trace a specific Java method
 function traceMethod(targetClassMethod)
 {
 	var delim = targetClassMethod.lastIndexOf(".");
@@ -120,7 +125,7 @@ function traceMethod(targetClassMethod)
 	}
 }
 
-// trace Module functions
+// Trace Module functions
 function traceModule(impl, name)
 {
 	console.log("Tracing " + name);
@@ -129,7 +134,7 @@ function traceModule(impl, name)
 
 		onEnter: function(args) {
 
-			// debug only the intended calls
+			// Trace only the intended calls
 			this.flag = false;
 			// var filename = Memory.readCString(ptr(args[0]));
 			// if (filename.indexOf("XYZ") === -1 && filename.indexOf("ZYX") === -1) // exclusion list
@@ -139,7 +144,7 @@ function traceModule(impl, name)
 			if (this.flag) {
 				console.warn("\n*** entered " + name);
 
-				// print backtrace
+				// Print backtrace
 				console.log("\nBacktrace:\n" + Thread.backtrace(this.context, Backtracer.ACCURATE)
 						.map(DebugSymbol.fromAddress).join("\n"));
 			}
@@ -148,7 +153,7 @@ function traceModule(impl, name)
 		onLeave: function(retval) {
 
 			if (this.flag) {
-				// print retval
+				// Print retval
 				console.log("\nretval: " + retval);
 				console.warn("\n*** exiting " + name);
 			}
@@ -157,7 +162,7 @@ function traceModule(impl, name)
 	});
 }
 
-// remove duplicates from array
+// Remove duplicates from array
 function uniqBy(array, key)
 {
         var seen = {};
@@ -167,7 +172,7 @@ function uniqBy(array, key)
         });
 }
 
-// usage examples
+// Usage examples
 setTimeout(function() { // avoid java.lang.ClassNotFoundException
 
 	Java.perform(function() {
