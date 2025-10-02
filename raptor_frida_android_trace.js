@@ -114,6 +114,7 @@ function traceMethod(targetClassMethod)
 			// });   
 
 			// Print args
+			// TODO: double check this works without the occasional crash
 			if (arguments.length) console.log();
 			for (var j = 0; j < arguments.length; j++) {
 				console.log("arg[" + j + "]: " + arguments[j]);
@@ -148,6 +149,7 @@ function traceModule(impl, name)
 				console.warn("\n*** entered " + name);
 
 				// Print backtrace
+				// TODO: understand why this crashes sometimes
 				// console.log("\nBacktrace:\n" + Thread.backtrace(this.context, Backtracer.ACCURATE)
 				// 		.map(DebugSymbol.fromAddress).join("\n"));
 			}
