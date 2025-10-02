@@ -10,6 +10,7 @@ All notable changes to this project are documented in this file.
 
 * Add Linux enumeration script.
 * Add Linux trace script.
+* Add CHANGELOG.md.
 
 ### Changed
 
