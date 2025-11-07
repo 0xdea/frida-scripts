@@ -23,20 +23,20 @@ A collection of my Frida.re instrumentation scripts to facilitate reverse engine
 
 ### iOS
 
-* [**raptor_frida_ios_trace.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_ios_trace.js). Full-featured ObjC and Module tracer for iOS.
-* [**raptor_frida_ios_enum.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_ios_enum.js). Collection of functions to enumerate ObjC classes and methods.
-* [**ios-snippets/**](https://github.com/0xdea/frida-scripts/tree/master/ios-snippets). Miscellaneous script snippets for iOS (tested with Frida before 17.0.0).
+* [**raptor_frida_ios_trace.js**](raptor_frida_ios_trace.js). Full-featured ObjC and Module tracer for iOS.
+* [**raptor_frida_ios_enum.js**](raptor_frida_ios_enum.js). Collection of functions to enumerate ObjC classes and methods.
+* [**ios-snippets/**](ios-snippets). Miscellaneous script snippets for iOS (tested with Frida before 17.0.0).
 
 ### Android
 
-* [**raptor_frida_android_trace.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_android_trace.js). Full-featured Java and Module tracer for Android.
-* [**raptor_frida_android_enum.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_android_enum.js). Collection of functions to enumerate Java classes and methods.
-* [**android-snippets/**](https://github.com/0xdea/frida-scripts/tree/master/android-snippets). Miscellaneous script snippets for Android (tested with Frida before 17.0.0).
+* [**raptor_frida_android_trace.js**](raptor_frida_android_trace.js). Full-featured Java and Module tracer for Android.
+* [**raptor_frida_android_enum.js**](raptor_frida_android_enum.js). Collection of functions to enumerate Java classes and methods.
+* [**android-snippets/**](android-snippets). Miscellaneous script snippets for Android (tested with Frida before 17.0.0).
 
 ### Linux
 
-* [**raptor_frida_linux_trace.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_linux_trace.js). Full-featured function call tracer for Linux.
-* [**raptor_frida_linux_enum.js**](https://github.com/0xdea/frida-scripts/blob/master/raptor_frida_linux_enum.js). Collection of functions to enumerate modules and functions in a binary.
+* [**raptor_frida_linux_trace.js**](raptor_frida_linux_trace.js). Full-featured function call tracer for Linux.
+* [**raptor_frida_linux_enum.js**](raptor_frida_linux_enum.js). Collection of functions to enumerate modules and functions in a binary.
 
 ### Windows
 
@@ -45,3 +45,7 @@ A collection of my Frida.re instrumentation scripts to facilitate reverse engine
 ### macOS
 
 * *TODO*
+
+## Changelog
+
+* [CHANGELOG.md](CHANGELOG.md)
