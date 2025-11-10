@@ -15,6 +15,8 @@ A collection of my Frida.re instrumentation scripts to facilitate reverse engine
 
 *Note: My iOS and Android scripts might require some tweakings. For a well-maintained project that includes some of my Frida scripts, refer to [Brida](https://github.com/federicodotta/Brida).*
 
+![](https://raw.githubusercontent.com/0xdea/frida-scripts/master/.img/bin.jpg)
+
 ## Blog post  
 
 * <https://web.archive.org/web/20200623001844/https://techblog.mediaservice.net/2017/09/tracing-arbitrary-methods-and-function-calls-on-android-and-ios/>
