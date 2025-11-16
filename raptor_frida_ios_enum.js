@@ -11,7 +11,7 @@
  * further information on this world-class dynamic instrumentation toolkit.
  *
  * Example usage:
- * $ pipx install frida-tools
+ * $ uv tool install frida-tools
  * $ frida -U -f com.target.app -l raptor_frida_ios_enum.js
  *
  * Tested with:

@@ -12,7 +12,7 @@
  * dynamic instrumentation toolkit.
  *
  * Example usage:
- * $ pipx install frida-tools
+ * $ uv tool install frida-tools
  * $ frida -f hello-vuln -l raptor_frida_linux_trace.js
  * 
  * Tested with:

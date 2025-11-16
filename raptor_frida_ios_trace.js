@@ -12,7 +12,7 @@
  * dynamic instrumentation toolkit.
  *
  * Example usage:
- * $ pipx install frida-tools
+ * $ uv tool install frida-tools
  * $ frida -U -f com.target.app -l raptor_frida_ios_trace.js
  *
  * Tested with:
