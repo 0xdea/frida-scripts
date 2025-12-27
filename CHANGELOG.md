@@ -10,7 +10,7 @@ All notable changes to this project are documented in this file.
 
 ## [0.2] - 2025-10-02
 
-* New release of main scripts ported to Frida >= 17.
+New release of main scripts ported to Frida >= 17.
 
 ### Added
 
@@ -29,7 +29,7 @@ All notable changes to this project are documented in this file.
 
 ## [0.1] - 2024-01-04
 
-* Historical battle-tested stable release that used to work before the [breaking changes](https://frida.re/news/2025/05/17/frida-17-0-0-released/) in Frida 17.x.
+Historical battle-tested stable release that used to work before the [breaking changes](https://frida.re/news/2025/05/17/frida-17-0-0-released/) in Frida 17.x.
 
 [unreleased]: https://github.com/0xdea/frida-scripts/compare/v0.2...HEAD
 
