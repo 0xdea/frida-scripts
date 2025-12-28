@@ -21,6 +21,10 @@ A collection of my Frida.re instrumentation scripts to facilitate reverse engine
 
 * <https://codeshare.frida.re/>
 
+## Compatibility
+
+* Tested with Frida 17.3.2
+
 ## Scripts
 
 ### iOS
