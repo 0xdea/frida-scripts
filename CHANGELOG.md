@@ -8,6 +8,10 @@ All notable changes to this project are documented in this file.
 
 * Improve documentation.
 
+### Fixed
+
+* Fix undeclared loop variables in iOS enumeration usage examples.
+
 ## [0.2] - 2025-10-02
 
 New release of main scripts ported to Frida >= 17.
