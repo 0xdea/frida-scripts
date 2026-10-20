@@ -120,10 +120,11 @@ if (ObjC.available) {
 	*/
 
 	// Enumerate all available methods
-	// TODO: understand why this doesn't work in script, but works in REPL
+	// NOTE: loop variables must be declared, because Frida evaluates scripts
+	// in strict mode, where assigning to undeclared identifiers is an error
 	/*
 	var d = enumAllMethods();
-	for (k in d) {
+	for (var k in d) {
 		console.log(k);
 		d[k].forEach(function(s) {
 			console.log("\t" + s);
@@ -132,10 +133,9 @@ if (ObjC.available) {
 	*/
 
 	// Find methods that match a pattern
-	// TODO: understand why this doesn't work in script, but works in REPL
 	/*
 	var d = findMethods(/password/i);
-	for (k in d) {
+	for (var k in d) {
 		console.log(k);
 		d[k].forEach(function(s) {
 			console.log("\t" + s);
