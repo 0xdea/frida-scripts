@@ -3,9 +3,8 @@
 [![](https://img.shields.io/github/stars/0xdea/frida-scripts.svg?style=flat&color=yellow)](https://github.com/0xdea/frida-scripts)
 [![](https://img.shields.io/github/forks/0xdea/frida-scripts.svg?style=flat&color=green)](https://github.com/0xdea/frida-scripts)
 [![](https://img.shields.io/github/watchers/0xdea/frida-scripts.svg?style=flat&color=red)](https://github.com/0xdea/frida-scripts)
-[![](https://img.shields.io/badge/frida-17.3.2-violet)](https://www.frida.re/)
-[![](https://img.shields.io/badge/twitter-%400xdea-blue.svg)](https://twitter.com/0xdea)
-[![](https://img.shields.io/badge/mastodon-%40raptor-purple.svg)](https://infosec.exchange/@raptor)
+[![](https://img.shields.io/badge/frida-17.3.2-purple)](https://www.frida.re/)
+[![](https://img.shields.io/badge/mastodon-%40raptor-blue.svg)](https://infosec.exchange/@raptor)
 
 A collection of my Frida.re instrumentation scripts to facilitate reverse engineering of mobile apps and more.
 
